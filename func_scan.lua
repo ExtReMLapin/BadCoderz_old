@@ -51,66 +51,73 @@ local function func_hasbad_func(containerf, tofindf)
 
 end
 
-local yellow = Color(202,230,0)
+local yellow = Color(255,136,0) -- it's orange, not yellow, i know
 local mg = Color(0,138,159)
 local red = Color(255,50,50)
 local green = Color(50,250,50)
 local blue = Color(150,150,250)
 function start_scanning() -- heavy function
-	MsgC(mg, "----------Starded Scanning for slow/spooky code----------\n")
+	MsgC(mg, "--------Starded Scanning for slow/spooky code--------\n")
 
 	for k, v in pairs(hook.GetTable()) do
 		local skip = true
 		for k42, v42 in pairs(dangerous_hooks) do
 			if string.match(k,v42) then skip = false end
 		end
-		if skip == false then 
-			local printedhookname = 0
-			for k2, v2 in pairs(v) do
-				local funcstr = v2:src()
-				if funcstr then 
-					for k3, v3 in pairs(heavy_funcs) do
-						if func_hasbad_func(funcstr, v3) then 
-							if printedhookname == 0 then 
-								printedhookname = 1
-								MsgC(red, "------Hook ")
-								MsgC(blue, k)
-								MsgC(red, " has spooky function(s) !\n")
-							end
-							MsgC(red, "------===Hook func ")
-							MsgC(blue, k2)
+		
+		local printedhookname = 0
+		for k2, v2 in pairs(v) do
+			local funcstr = v2:src()
+			if funcstr then 
+				for k3, v3 in pairs(heavy_funcs) do
+					local result = func_hasbad_func(funcstr, v3)
+					if result then 
+						local len = string.len(result) 
+						result = string.Right(string.Left(result, len-1),len-2)
+						if printedhookname == 0 then 
+							printedhookname = 1
+							MsgC(red, "▬▬▬▬▬▬Hook ")
+							MsgC(blue, k)
+							MsgC(red, " has spooky function(s) !\n")
+						end
+						MsgC(red, "▬▬▬▬▬▬───Hook func ")
+						MsgC(blue, k2)
+
+						if skip == true then 
 							MsgC(red, " has slow func : ")
-							MsgC(blue, v3 .. "\n")
+							MsgC(blue, result)
+							MsgC(green, " but the hook is not Heavy.\n")
+
+						else
+							MsgC(red, " has slow func : ")
+							MsgC(blue, result .. "\n")
 							local path = debug.getinfo(v2)["source"]
-							MsgC(blue, "------===" .. path .. "\n")
-							MsgC(yellow, "-----------\n")
-							MsgC(mg, funcstr)
-							MsgC(yellow, "\n\n-----------\n")
-
-
+							MsgC(blue, "▬▬▬▬▬▬───" .. path .. "\n")
+							MsgC(red, "▬▬▬▬▬▬▬▬▬▬▬\n")
+							MsgC(yellow, funcstr)
+							MsgC(red, "\n\n▬▬▬▬▬▬▬▬▬▬▬\n")
 						end
 					end
-				else
-					if printedhookname == 0 then 
-						printedhookname = 1
-						MsgC(red, "------Hook ")
-						MsgC(blue, k)
-						MsgC(red, " has spooky function(s) !\n")
-					end
-					MsgC(red, "------===Hook func ")
-					MsgC(blue, k2)
-					MsgC(red, " was not decompiled to Lua.\n")
 				end
-
+			else
+				if printedhookname == 0 then 
+					printedhookname = 1
+					MsgC(red, "▬▬▬▬▬▬Hook ")
+					MsgC(blue, k)
+					MsgC(red, " has spooky function(s) !\n")
+				end
+				MsgC(red, "▬▬▬▬▬▬───Hook func ")
+				MsgC(blue, k2)
+				MsgC(red, " was not decompiled to Lua.\n")
 			end
-			if printedhookname == 0 then 
-				MsgC(green, "------Hook ")
-				MsgC(blue, k)
-				MsgC(green, " is CLEAN !\n")
-			end
+		end
+		if printedhookname == 0 then 
+			MsgC(green, "▬▬▬▬▬▬Hook ")
+			MsgC(blue, k)
+			MsgC(green, " is CLEAN !\n")
 		end
 	end
 		
-	MsgC(mg, "---------Finished Scanning for slow/spooky code---------\n")
+	MsgC(mg, "--------Finished Scanning for slow/spooky code--------\n")
 
 end
