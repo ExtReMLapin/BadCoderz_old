@@ -12,6 +12,10 @@ TO DO :
 
 
 -Scan for bad timers
+
 -Include Decompiled Lua (i call it ASM even if it's not) scanning.
+
 -Include open source func:src()
+
 -Don't read commented parts/lines
+
