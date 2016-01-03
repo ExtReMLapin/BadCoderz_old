@@ -28,10 +28,10 @@ What's it's telling you :
 
 local dangerous_hooks = {"Tick", "Think", "HUD", "Draw", "Calc"} -- Just part name of the hook, found with string.match(Realhook_name,v); v is one of the string here
 local heavy_funcs = {"[^%a]Material[^%a]", -- So SetMaterial is not called
-					"surface.CreateFont",
-					"surface.GetTextureID",
-					"player.GetAll()", -- player.GetAll(), ents.GetAll() 
-					"ents.GetAll()",
+					"[^%a]surface.CreateFont[^%a]",
+					"[^%a]surface.GetTextureID[^%a]",
+					"[^%a]player.GetAll[^%a]",
+					"[^%a]ents.GetAll[^%a]",
 					}
 
 
