@@ -67,7 +67,7 @@ function start_scanning() -- heavy function
 		
 		local printedhookname = 0
 		for k2, v2 in pairs(v) do
-			local funcstr = v2:src()
+			local funcstr, funcstr2 = v2:src()
 			if funcstr then 
 				for k3, v3 in pairs(heavy_funcs) do
 					local result = func_hasbad_func(funcstr, v3)
@@ -100,15 +100,36 @@ function start_scanning() -- heavy function
 					end
 				end
 			else
-				if printedhookname == 0 then 
-					printedhookname = 1
-					MsgC(red, "▬▬▬▬▬▬Hook ")
-					MsgC(blue, k)
-					MsgC(red, " has spooky function(s) !\n")
+				for k3, v3 in pairs(heavy_funcs) do
+					local result = func_hasbad_func(funcstr2, v3)
+					if result then 
+						local len = string.len(result) 
+						result = string.Right(string.Left(result, len-1),len-2)
+						if printedhookname == 0 then 
+							printedhookname = 1
+							MsgC(red, "▬▬▬▬▬▬Hook ")
+							MsgC(blue, k)
+							MsgC(red, " has spooky decompiled function(s) !\n")
+						end
+						MsgC(red, "▬▬▬▬▬▬───Hook func ")
+						MsgC(blue, k2)
+
+						if skip == true then 
+							MsgC(red, " has slow decompiled func : ")
+							MsgC(blue, result)
+							MsgC(green, " but the hook is not Heavy.\n")
+
+						else
+							MsgC(red, " has slow decompiled func : ")
+							MsgC(blue, result .. "\n")
+							local path = debug.getinfo(v2)["source"]
+							MsgC(blue, "▬▬▬▬▬▬───" .. path .. "\n")
+							MsgC(red, "▬▬▬▬▬▬▬▬▬▬▬\n")
+							MsgC(yellow, funcstr2)
+							MsgC(red, "\n\n▬▬▬▬▬▬▬▬▬▬▬\n")
+						end
+					end
 				end
-				MsgC(red, "▬▬▬▬▬▬───Hook func ")
-				MsgC(blue, k2)
-				MsgC(red, " was not decompiled to Lua.\n")
 			end
 		end
 		if printedhookname == 0 then 
@@ -117,7 +138,6 @@ function start_scanning() -- heavy function
 			MsgC(green, " is CLEAN !\n")
 		end
 	end
-		
 	MsgC(mg, "--------Finished Scanning for slow/spooky code--------\n")
 
 end
