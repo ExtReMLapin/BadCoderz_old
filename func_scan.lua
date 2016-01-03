@@ -3,6 +3,7 @@ Disclamer :
 
 metafunc:src() is not included, this function return (char*) the function's source code  and will decompile it if it's compiled.
 It's searching for resource-heavy function in high rate hooks (Looking at you coderhire """""""coders""""""")
+If lua decompilation fail but ASM decompile works, it will return " false, asm string func"
 
 
 What's it's not doing : 
@@ -26,7 +27,7 @@ What's it's telling you :
 
 
 local dangerous_hooks = {"Tick", "Think", "HUD", "Draw", "Calc"} -- Just part name of the hook, found with string.match(Realhook_name,v); v is one of the string here
-local heavy_funcs = {"Material",
+local heavy_funcs = {"[^%a]Material[^%a]", -- So SetMaterial is not called
 					"surface.CreateFont",
 					"surface.GetTextureID",
 					"player.GetAll()", -- player.GetAll(), ents.GetAll() 
@@ -98,7 +99,7 @@ function start_scanning() -- heavy function
 					end
 					MsgC(red, "------===Hook func ")
 					MsgC(blue, k2)
-					MsgC(red, " is using a built-in C++ gmod function.\n")
+					MsgC(red, " was not decompiled to Lua.\n")
 				end
 
 			end
