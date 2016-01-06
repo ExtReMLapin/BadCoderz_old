@@ -3,6 +3,9 @@ Finding bad code easily
 
 
 
+![Output](http://extrem-team.com/console.png)
+
+
 Fast way to scan for resource heavy .
 
 This is NOT a profiler, it's not scanning for bad code performance, it's scanning for "easy to fix" optimizations problems.
