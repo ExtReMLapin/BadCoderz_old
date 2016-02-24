@@ -2,6 +2,13 @@
 Finding bad code easily
 
 
+you can find a func_meta:src() func there :
+
+http://oohh.googlecode.com/svn/trunk/mmyy/lua/platforms/standard/meta/function.lua
+
+Or make your own.
+
+If you got the SVN access to metastruct, it's in "helpers" addon.
 
 ![Output](http://extrem-team.com/console.png)
 
