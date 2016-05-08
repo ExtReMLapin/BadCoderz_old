@@ -1,12 +1,7 @@
 # BadCoderz
 Finding bad code easily
 
-
-you can find a func_meta:src() func there :
-
-http://oohh.googlecode.com/svn/trunk/mmyy/lua/platforms/standard/meta/function.lua
-
-Or make your own.
+[GLib is required to make the decompiler work](https://github.com/notcake/glib)
 
 If you got the SVN access to metastruct, it's in "helpers" addon.
 
