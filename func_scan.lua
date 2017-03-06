@@ -32,6 +32,7 @@ local heavy_funcs = {"[^%a]Material[^%a]", -- So SetMaterial is not called
 					"[^%a]surface.GetTextureID[^%a]",
 					"[^%a]player.GetAll[^%a]",
 					"[^%a]ents.GetAll[^%a]",
+					"[^%a]Color[^%a]",
 					}
 
 
