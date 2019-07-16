@@ -1,3 +1,5 @@
+[Deprecated, please use this](https://www.gmodstore.com/market/view/6510)
+
 # BadCoderz
 Finding bad code easily
 
