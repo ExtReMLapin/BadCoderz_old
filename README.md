@@ -1,4 +1,4 @@
-# [**Deprecated, please use this**](https://www.gmodstore.com/market/view/6510)
+# [**Deprecated, please use this**](https://github.com/ExtReMLapin/BadCoderz/)
 
 # BadCoderz
 Finding bad code easily
